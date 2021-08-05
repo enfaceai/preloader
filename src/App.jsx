@@ -1,9 +1,9 @@
 import React from 'react';
-import AppIndex from './AppIndex';
-
+import Preloader from "../dist";
 
 export const App = () => {
+  console.log(Preloader, 'pre')
   return (
-    <AppIndex/>
+    <div/>
   );
 };
