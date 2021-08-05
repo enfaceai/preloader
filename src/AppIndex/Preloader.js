@@ -68,7 +68,7 @@ const Preloader = ({
 
     const render = (time) => {
         if (startTime === null) return;
-        const lineTopOffset = lineRef.current.getBoundingClientRect().top + window.scrollY;
+        const lineTopOffset = lineRef.current?.getBoundingClientRect().top + window.scrollY;
         pathOffsets.forEach((dot) => {
             const differenceSize = lineTopOffset - dot.offsetY;
             dot.path.style.transform = `scale(${heightOffsetCalc(differenceSize, dotScaleSize)}) translateX(${dot.offsetX > 8 || dot.offsetX < -8 ? offsetCalc(differenceSize, dot.offsetX, offsetLine, dotHorizontalOffset) : 0})`;

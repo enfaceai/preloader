@@ -99,8 +99,10 @@ const Preloader = _ref => {
   };
 
   const render = time => {
+    var _lineRef$current;
+
     if (startTime === null) return;
-    const lineTopOffset = lineRef.current.getBoundingClientRect().top + window.scrollY;
+    const lineTopOffset = ((_lineRef$current = lineRef.current) === null || _lineRef$current === void 0 ? void 0 : _lineRef$current.getBoundingClientRect().top) + window.scrollY;
     pathOffsets.forEach(dot => {
       const differenceSize = lineTopOffset - dot.offsetY;
       dot.path.style.transform = "scale(".concat(heightOffsetCalc(differenceSize, dotScaleSize), ") translateX(").concat(dot.offsetX > 8 || dot.offsetX < -8 ? offsetCalc(differenceSize, dot.offsetX, offsetLine, dotHorizontalOffset) : 0, ")");
