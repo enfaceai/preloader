@@ -1,0 +1,44 @@
+.widget-animation {
+    position: relative;
+    padding: 50px 0;
+    text-align: center;
+  }
+
+.widget-animation svg{
+  fill: white;
+}
+  .widget-stroke,
+  .widget-stroke-top {
+    bottom: 0px;
+    left: 0;
+    height: 1px;
+    position: absolute;
+    background: transparent;
+  }
+  
+  .widget-stroke{
+    width: 100%;
+    bottom: -60px;
+  }
+  
+  .widget-stroke-top {
+    height: 100%;
+    width: 1px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  .widget-loader {
+    overflow: visible;
+  }
+  .widget-loader path {
+    transform-box: fill-box;
+  }
+  
+  .widget-fullWidth-image{
+    max-width: unset;
+    position: relative;
+    left: -32px;
+    width: calc(100% + 64px);
+  }
