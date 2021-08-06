@@ -6,6 +6,7 @@
 
 .widget-animation svg{
   fill: white;
+  transform-origin: center;
 }
   .widget-stroke,
   .widget-stroke-top {

@@ -14,12 +14,14 @@ const offsetCalc = (line, offsetX, offsetLine, dotHorizontalOffset) => {
     return '0px';
 };
 
-const heightOffsetCalc = (line, dotScaleSize) => {
-    const formatNumber = (dotScaleSize - (Math.abs(line) / 100));
-    if (formatNumber < 1) {
-        return 1;
+const heightOffsetCalc = (line, dotScaleSize, offsetLine) => {
+    if (Math.abs(line) < offsetLine) {
+    const horizontalLine = 1 - Math.abs(line) / offsetLine;
+    const calc = horizontalLine * (dotScaleSize - 1);
+    const dotSize = (calc + '').split ('.') [1];
+    return `1.${dotSize}`
     }
-    return formatNumber;
+    return 1;
 };
 
 const calculateColor = (n, list1, list2) => {
@@ -40,7 +42,9 @@ const getColor = (line, cycle, offsetLine, fillStyle) => {
 };
 
 const Preloader = ({
-                      endPos = 310,
+                    width = 149,
+                    height = 207,
+                      endPos = 335,
                       duration = 1500,
                       offsetLine = 50,
                       dotScaleSize = 1.4,
@@ -67,11 +71,11 @@ const Preloader = ({
     };
 
     const render = (time) => {
-        if (startTime === null) return;
-        const lineTopOffset = lineRef.current?.getBoundingClientRect().top + window.scrollY;
+        if (startTime === null || !lineRef.current) return;
+        const lineTopOffset = lineRef.current.getBoundingClientRect().top + window.scrollY;
         pathOffsets.forEach((dot) => {
             const differenceSize = lineTopOffset - dot.offsetY;
-            dot.path.style.transform = `scale(${heightOffsetCalc(differenceSize, dotScaleSize)}) translateX(${dot.offsetX > 8 || dot.offsetX < -8 ? offsetCalc(differenceSize, dot.offsetX, offsetLine, dotHorizontalOffset) : 0})`;
+            dot.path.style.transform = `scale(${heightOffsetCalc(differenceSize, dotScaleSize, offsetLine, dot.offsetY)}) translateX(${dot.offsetX > 8 || dot.offsetX < -8 ? offsetCalc(differenceSize, dot.offsetX, offsetLine, dotHorizontalOffset) : 0})`;
             if (lineTopOffset >= dot.offsetY && differenceSize < offsetLine) {
                 dot.path.style.fill = getColor(differenceSize, cycle, offsetLine, fillStyle);
                 //  lineTopOffset >= dot.offsetY && differenceSize < offsetLine * 2 - bottom line
@@ -102,7 +106,7 @@ const Preloader = ({
 
     return (
         <div className="widget-animation">
-            <LogoIcon ref={svgRef}/>
+            <LogoIcon ref={svgRef} width={width} height={height}/>
             <div ref={lineRef} className="widget-stroke"/>
             <div ref={heightLineRef} className="widget-stroke-top"/>
         </div>
