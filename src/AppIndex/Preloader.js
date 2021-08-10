@@ -42,8 +42,6 @@ const getColor = (line, cycle, offsetLine, fillStyle) => {
 };
 
 const Preloader = ({
-                    width = 149,
-                    height = 207,
                       duration = 1500,
                       offsetLine = 50,
                       dotScaleSize = 1.4,
@@ -64,7 +62,7 @@ const Preloader = ({
     let endPos = null
 
     useEffect(() => {
-        endPos = document.getElementById('enface-preloader')?.clientHeight
+        endPos = document.getElementById('enface-preloader')?.clientHeight 
     }, [])
 
     const stopAnimation = async () => {
@@ -109,8 +107,10 @@ const Preloader = ({
     }, []);
 
     return (
-        <div className="widget-animation" id='enface-preloader' style={{padding: `${offsetLine}px 0`}}>
-            <LogoIcon ref={svgRef} width={width} height={height}/>
+        <div className="widget-animation" id='enface-preloader'>
+            <div style={{padding: `${offsetLine}px 0`}}>
+            <LogoIcon ref={svgRef} />
+            </div>
             <div ref={lineRef} className="widget-stroke"/>
             <div ref={heightLineRef} className="widget-stroke-top"/>
         </div>
