@@ -40,14 +40,15 @@ const offsetCalc = (line, offsetX, offsetLine, dotHorizontalOffset) => {
   return '0px';
 };
 
-const heightOffsetCalc = (line, dotScaleSize) => {
-  const formatNumber = dotScaleSize - Math.abs(line) / 100;
-
-  if (formatNumber < 1) {
-    return 1;
+const heightOffsetCalc = (line, dotScaleSize, offsetLine) => {
+  if (Math.abs(line) < offsetLine) {
+    const horizontalLine = 1 - Math.abs(line) / offsetLine;
+    const calc = horizontalLine * (dotScaleSize - 1);
+    const dotSize = (calc + '').split('.')[1];
+    return "1.".concat(dotSize);
   }
 
-  return formatNumber;
+  return 1;
 };
 
 const calculateColor = (n, list1, list2) => {
@@ -70,7 +71,6 @@ const getColor = (line, cycle, offsetLine, fillStyle) => {
 
 const Preloader = _ref => {
   let {
-    endPos = 310,
     duration = 1500,
     offsetLine = 50,
     dotScaleSize = 1.4,
@@ -90,6 +90,12 @@ const Preloader = _ref => {
   const pathOffsets = [];
   let cycle = 1;
   let customDuration = duration < 1000 ? 1000 : duration;
+  let endPos = null;
+  (0, _react.useEffect)(() => {
+    var _document$getElementB;
+
+    endPos = (_document$getElementB = document.getElementById('enface-preloader')) === null || _document$getElementB === void 0 ? void 0 : _document$getElementB.clientHeight;
+  }, []);
 
   const stopAnimation = async () => {
     startTime = null;
@@ -99,13 +105,11 @@ const Preloader = _ref => {
   };
 
   const render = time => {
-    var _lineRef$current;
-
-    if (startTime === null) return;
-    const lineTopOffset = ((_lineRef$current = lineRef.current) === null || _lineRef$current === void 0 ? void 0 : _lineRef$current.getBoundingClientRect().top) + window.scrollY;
+    if (startTime === null || !lineRef.current || !endPos) return;
+    const lineTopOffset = lineRef.current.getBoundingClientRect().top + window.scrollY;
     pathOffsets.forEach(dot => {
       const differenceSize = lineTopOffset - dot.offsetY;
-      dot.path.style.transform = "scale(".concat(heightOffsetCalc(differenceSize, dotScaleSize), ") translateX(").concat(dot.offsetX > 8 || dot.offsetX < -8 ? offsetCalc(differenceSize, dot.offsetX, offsetLine, dotHorizontalOffset) : 0, ")");
+      dot.path.style.transform = "scale(".concat(heightOffsetCalc(differenceSize, dotScaleSize, offsetLine, dot.offsetY), ") translateX(").concat(dot.offsetX > 8 || dot.offsetX < -8 ? offsetCalc(differenceSize, dot.offsetX, offsetLine, dotHorizontalOffset) : 0, ")");
 
       if (lineTopOffset >= dot.offsetY && differenceSize < offsetLine) {
         dot.path.style.fill = getColor(differenceSize, cycle, offsetLine, fillStyle); //  lineTopOffset >= dot.offsetY && differenceSize < offsetLine * 2 - bottom line
@@ -137,10 +141,15 @@ const Preloader = _ref => {
     animationLoop(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "widget-animation"
+    className: "widget-animation",
+    id: "enface-preloader"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      padding: "".concat(offsetLine, "px 0")
+    }
   }, /*#__PURE__*/_react.default.createElement(_LogoIcon.LogoIcon, {
     ref: svgRef
-  }), /*#__PURE__*/_react.default.createElement("div", {
+  })), /*#__PURE__*/_react.default.createElement("div", {
     ref: lineRef,
     className: "widget-stroke"
   }), /*#__PURE__*/_react.default.createElement("div", {

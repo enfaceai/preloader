@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "scripts": {
     "start": "webpack serve --open --config ./webpack/webpack.dev.js",
-    "build": "NODE_ENV=production babel src/AppIndex --out-dir dist --copy-files",
-    "publish": "cd dist & npm publish"
+    "build": "babel src/AppIndex --out-dir dist --copy-files",
+    "publish": "cd dist & npm publish",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",

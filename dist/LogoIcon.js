@@ -12,8 +12,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const LogoIcon = /*#__PURE__*/_react.default.forwardRef((props, ref) => /*#__PURE__*/_react.default.createElement("svg", {
   ref: ref,
   className: "widget-loader",
-  width: "149",
-  height: "207",
+  width: "100%",
+  height: "100%",
   viewBox: "0 0 149 207",
   xmlns: "http://www.w3.org/2000/svg"
 }, /*#__PURE__*/_react.default.createElement("path", {
