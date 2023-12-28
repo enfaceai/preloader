@@ -12,22 +12,19 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.(png|gif|jpg)$/i,
         exclude: /(node_modules)/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: 'assets',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'assets',
+            },
           },
-        }],
+        ],
       },
       {
         test: /\.svg$/,
@@ -36,12 +33,14 @@ module.exports = {
       {
         test: /\.(eot|ttf|woff|woff2)$/i,
         exclude: /(node_modules)/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: 'assets',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'assets',
+            },
           },
-        }],
+        ],
       },
     ],
   },

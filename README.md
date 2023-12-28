@@ -10,9 +10,9 @@
 
 ## Parameters
 
-` endPos` Number, end of axis top point, `310` by default
+`endPos` Number, end of axis top point, `310` by default
 
- `duration` Number, animation duration, `1500` by default
+`duration` Number, animation duration, `1500` by default
  
 `offsetLine` Number, count of pixels that the line touches when passing, `50` by default
 
@@ -26,6 +26,6 @@
 
 `fillStyle = {
     first:,  'rgb(55, 164, 255)',
-    second: 'rgb(255,255,255',
+    second: 'rgb(255,255,255)',
  }` by default
  

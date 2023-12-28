@@ -4,12 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.LogoIcon = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const LogoIcon = /*#__PURE__*/_react.default.forwardRef((props, ref) => /*#__PURE__*/_react.default.createElement("svg", {
+const LogoIcon = exports.LogoIcon = /*#__PURE__*/_react.default.forwardRef((_, ref) => /*#__PURE__*/_react.default.createElement("svg", {
   ref: ref,
   className: "widget-loader",
   width: "100%",
@@ -173,5 +170,3 @@ const LogoIcon = /*#__PURE__*/_react.default.forwardRef((props, ref) => /*#__PUR
 }), /*#__PURE__*/_react.default.createElement("path", {
   d: "M0 94.6385C0 96.4929 1.51247 98.0022 3.39226 98.0022C5.25043 98.0022 6.76291 96.4929 6.78451 94.6385C6.78451 92.7626 5.27204 91.2532 3.39226 91.2532C1.51247 91.2532 0 92.7626 0 94.6385Z"
 })));
-
-exports.LogoIcon = LogoIcon;
